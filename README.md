@@ -1,7 +1,5 @@
 # ESP32StartupErrorAnalyzer
 
-# ESP32StartupErrorAnalyzer
-
 ESP32StartupErrorAnalyzer is an Arduino library that facilitates the analysis and handling of startup error conditions on ESP32 devices. 
 
 ## Features
