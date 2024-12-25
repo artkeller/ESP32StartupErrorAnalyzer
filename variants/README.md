@@ -1,0 +1,45 @@
+# Varianten
+
+Die `ESP32StartupErrorAnalyzer`-Bibliothek, ist grundsätzlich mit allen ESP32-Modellen, wie **ESP32**, **ESP32-C2**, **ESP32-C3**, **ESP32-C5**, **ESP32-S2**, **ESP32-S3**, **ESP32-H2** und **ESP32-P4** kompatibel. Allerdings gibt es einige Unterschiede, wenn die Bibliothek auf allen diesen Varianten verwendet werden:
+
+### 1. **Reset-Gründe (`esp_reset_reason`)**
+
+Die Funktion `esp_reset_reason()` gibt den Grund für den Reset zurück. In der Regel sind diese Gründe (wie **ESP_RST_PANIC**, **ESP_RST_POWERON**, etc.) in den verschiedenen ESP32-Varianten **kompatibel**, aber es gibt auch einige Unterschiede zwischen den Varianten. Die gängigsten Reset-Gründe sind:
+
+- **ESP_RST_PANIC**: Auftritt, wenn der ESP32 wegen eines Software-Panics neu startet.
+- **ESP_RST_POWERON**: Tritt nach dem Einschalten des ESP32 auf.
+- **ESP_RST_BROWNOUT**: Wird durch eine Unterspannungsbedingung ausgelöst.
+- **ESP_RST_SW**: Software-Reset.
+- **ESP_RST_DEEPSLEEP**: Tiefschlaf-Reset.
+- **ESP_RST_EXT**: Reset durch externes Signal.
+
+Die oben genannten Gründe sind in den meisten Varianten der ESP32-Serie **gemeinsam**, aber einige neue Modelle wie **ESP32-S2** oder **ESP32-S3** haben zusätzliche spezifische Reset-Gründe. Die neueren Modelle wie der **ESP32-C3** und **ESP32-H2** haben möglicherweise auch erweiterte oder leicht unterschiedliche Reset-Gründe aufgrund von neuen Peripherien oder Funktionen, die in diesen Chips integriert sind.
+
+### 2. **Wakeup-Gründe (`esp_sleep_get_wakeup_cause`)**
+
+Die `esp_sleep_get_wakeup_cause()`-Funktion gibt an, wie der ESP32 aus dem Schlafmodus geweckt wurde. Auch hier gibt es Unterschiede zwischen den Varianten. Gängige Wakeup-Gründe sind:
+
+- **ESP_SLEEP_WAKEUP_UNDEFINED**: Kein spezifizierter Wakeup-Grund.
+- **ESP_SLEEP_WAKEUP_EXT0**: Externer Wakeup.
+- **ESP_SLEEP_WAKEUP_EXT1**: Wakeup von externem Gerät über einen anderen Pin.
+- **ESP_SLEEP_WAKEUP_TIMER**: Timer-basierter Wakeup.
+- **ESP_SLEEP_WAKEUP_TOUCHPAD**: Wakeup durch einen Touchpad-Interrupt.
+- **ESP_SLEEP_WAKEUP_GPIO**: Wakeup durch GPIO-Pin.
+  
+Die Wakeup-Gründe sind grundsätzlich in allen Varianten ähnlich, jedoch können **neuere Modelle** (wie der **ESP32-S2** oder **ESP32-C3**) zusätzliche Wakeup-Gründe oder -Methoden haben, die auf neuen Funktionalitäten oder unterschiedlichen Energiemodi basieren.
+
+### 3. **Neue Varianten (z. B. ESP32-C2, ESP32-H2, ESP32-P4)**
+
+Die **ESP32-C2**, **ESP32-H2**, **ESP32-P4** und andere zukünftige Varianten können **unterschiedliche Reset- und Wakeup-Gründe** sowie erweiterte Funktionen bieten. Hier ist zu erwarten, dass einige Modelle entweder neue spezialisierte Reset-/Wakeup-Gründe haben oder durch neue Features zusätzliche Optionen zur Fehleranalyse bieten.
+
+### 4. **Kompatibilität der Bibliothek**
+
+Insgesamt sind die meisten grundlegenden Reset-Gründe und Wakeup-Gründe in allen ESP32-Varianten ziemlich ähnlich und die von uns entwickelte `ESP32StartupErrorAnalyzer`-Bibliothek sollte grundsätzlich mit den meisten Varianten kompatibel sein. Wenn du jedoch sicherstellen möchtest, dass deine Bibliothek auch mit den neuesten Varianten (wie C2, C3, H2, P4) perfekt funktioniert, könnte es erforderlich sein, zusätzliche Tests und Anpassungen vorzunehmen, vor allem, wenn es spezifische Fehlerbedingungen oder spezielle Reset-/Wakeup-Gründe in diesen neuen Modellen gibt.
+
+#### Empfehlung:
+- **Testen auf allen Varianten**: Führe Tests auf verschiedenen ESP32-Varianten durch, um sicherzustellen, dass alle Reset- und Wakeup-Gründe korrekt erkannt werden.
+- **Modularität**: Du kannst die Bibliothek so gestalten, dass sie bei der Initialisierung die Verfügbarkeit bestimmter Reset-/Wakeup-Gründe überprüft und nur die relevanten Fehlerbedingungen aktiviert. Dies kann durch `#ifdef`-Bedingungen für verschiedene Chip-Modelle erfolgen.
+- **Zukünftige Varianten berücksichtigen**: Stelle sicher, dass bei neuen Modellen wie dem ESP32-H2 oder ESP32-P4 neue Reset-/Wakeup-Gründe berücksichtigt werden.
+
+### Fazit:
+Die Bibliothek ist grundsätzlich auf allen ESP32-Modellen gut verwendbar, aber du solltest darauf achten, dass du bei neueren Varianten wie C2, C3, H2 und P4 möglicherweise zusätzliche Tests oder Anpassungen benötigst, um sicherzustellen, dass alle Reset- und Wakeup-Gründe korrekt behandelt werden.
