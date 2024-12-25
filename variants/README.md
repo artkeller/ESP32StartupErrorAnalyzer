@@ -85,38 +85,72 @@ Die Reset- und Wakeup-Gründe basieren auf zentral definierten Enumerationen im 
 ### Reset-Gründe (`esp_reset_reason_t`)  
 
 ```cpp
+/**
+ * @brief Enumeration der möglichen Reset-Ursachen für ESP32-Varianten.
+ * 
+ * Diese Enumeration definiert die verschiedenen Gründe, warum ein ESP32-Mikrocontroller
+ * einen Reset ausführen kann. Die Gründe können hardwarebedingt (z. B. Stromausfall),
+ * softwarebedingt (z. B. ein Watchdog-Timer) oder durch externe Ereignisse ausgelöst sein.
+ *
+ * Die Reset-Ursachen können je nach ESP32-Variante leicht variieren. Diese Liste basiert auf
+ * den Definitionen aus dem ESP-IDF Framework (Version 5.3.2).
+ *
+ * @note Einige Reset-Ursachen sind nicht auf allen Varianten verfügbar. Details finden Sie in
+ *       den ESP-IDF Dokumentationen zu den jeweiligen Varianten.
+ *
+ * @enum esp_reset_reason_t
+ */
 typedef enum {
-    ESP_RST_UNKNOWN,    //!< Grund unbekannt
-    ESP_RST_POWERON,    //!< Reset durch Power-On-Ereignis
-    ESP_RST_EXT,        //!< Externer Reset (nicht für alle Modelle verfügbar)
-    ESP_RST_SW,         //!< Software-Reset
-    ESP_RST_PANIC,      //!< Software-Panic-Reset
-    ESP_RST_INT_WDT,    //!< Interrupt-Watchdog-Reset
-    ESP_RST_TASK_WDT,   //!< Task-Watchdog-Reset
-    ESP_RST_WDT,        //!< Reset durch andere Watchdogs
-    ESP_RST_DEEPSLEEP,  //!< Reset nach Tiefschlafmodus
-    ESP_RST_BROWNOUT,   //!< Reset durch Unterspannung
-    ESP_RST_SDIO,       //!< Reset über SDIO
-    ESP_RST_USB,        //!< Reset durch USB-Peripherie
-    ESP_RST_PWR_GLITCH, //!< Reset durch Power-Glitch
-    ESP_RST_CPU_LOCKUP, //!< Reset durch CPU-Lockup
+    ESP_RST_UNKNOWN,    //!< Reset-Ursache konnte nicht bestimmt werden.
+    ESP_RST_POWERON,    //!< Reset durch ein Power-On-Ereignis.
+    ESP_RST_EXT,        //!< Reset durch externes Signal (nicht anwendbar auf ESP32).
+    ESP_RST_SW,         //!< Software-Reset durch `esp_restart`.
+    ESP_RST_PANIC,      //!< Software-Reset aufgrund eines Ausnahmepanics.
+    ESP_RST_INT_WDT,    //!< Reset durch Interrupt-Watchdog (Software oder Hardware).
+    ESP_RST_TASK_WDT,   //!< Reset durch Task-Watchdog.
+    ESP_RST_WDT,        //!< Reset durch andere Watchdogs.
+    ESP_RST_DEEPSLEEP,  //!< Reset nach Verlassen des Deep-Sleep-Modus.
+    ESP_RST_BROWNOUT,   //!< Brownout-Reset (Software oder Hardware).
+    ESP_RST_SDIO,       //!< Reset über SDIO-Schnittstelle.
+    ESP_RST_USB,        //!< Reset durch USB-Peripherie.
+    ESP_RST_JTAG,       //!< Reset durch JTAG.
+    ESP_RST_EFUSE,      //!< Reset aufgrund eines eFuse-Fehlers.
+    ESP_RST_PWR_GLITCH, //!< Reset aufgrund eines erkannten Stromstoßes.
+    ESP_RST_CPU_LOCKUP  //!< Reset durch CPU-Blockierung (doppelter Ausnahmefehler).
 } esp_reset_reason_t;
 ```
 
 ### Wakeup-Gründe (`esp_sleep_source_t`)  
 
 ```cpp
+/**
+ * @brief Enumeration der Wakeup-Gründe aus dem Schlafmodus.
+ *
+ * Diese Enumeration beschreibt die möglichen Gründe, warum ein ESP32-Mikrocontroller
+ * aus dem Schlafmodus aufwacht. Dazu gehören externe Signale, Timer-basierte
+ * Wakeups oder interne Ereignisse wie GPIO-Interrupts.
+ *
+ * Die Wakeup-Gründe sind je nach ESP32-Variante unterschiedlich. Diese Liste basiert auf
+ * den Definitionen aus dem ESP-IDF Framework (Version 5.3.2).
+ *
+ * @note Einige Wakeup-Quellen, wie z. B. WiFi oder Bluetooth, sind nur in bestimmten Varianten verfügbar.
+ *
+ * @enum esp_sleep_source_t
+ */
 typedef enum {
-    ESP_SLEEP_WAKEUP_UNDEFINED,    //!< Kein spezifizierter Wakeup-Grund
-    ESP_SLEEP_WAKEUP_ALL,          //!< Keine spezifische Quelle, deaktiviert alle Wakeup-Quellen
-    ESP_SLEEP_WAKEUP_EXT0,         //!< RTC_IO-Wakeup
-    ESP_SLEEP_WAKEUP_EXT1,         //!< RTC_CNTL-Wakeup
-    ESP_SLEEP_WAKEUP_TIMER,        //!< Timer-Wakeup
-    ESP_SLEEP_WAKEUP_TOUCHPAD,     //!< Touchpad-Wakeup
-    ESP_SLEEP_WAKEUP_GPIO,         //!< GPIO-Wakeup (Light Sleep)
-    ESP_SLEEP_WAKEUP_UART,         //!< UART-Wakeup (Light Sleep)
-    ESP_SLEEP_WAKEUP_WIFI,         //!< WIFI-Wakeup (Light Sleep)
-    ESP_SLEEP_WAKEUP_BT,           //!< BT-Wakeup (Light Sleep)
+    ESP_SLEEP_WAKEUP_UNDEFINED,    //!< Kein definierter Wakeup-Grund.
+    ESP_SLEEP_WAKEUP_ALL,          //!< Deaktiviert alle Wakeup-Quellen (nicht direkt ein Wakeup-Grund).
+    ESP_SLEEP_WAKEUP_EXT0,         //!< Wakeup durch externes Signal über RTC_IO.
+    ESP_SLEEP_WAKEUP_EXT1,         //!< Wakeup durch externes Signal über RTC_CNTL.
+    ESP_SLEEP_WAKEUP_TIMER,        //!< Wakeup durch Timer.
+    ESP_SLEEP_WAKEUP_TOUCHPAD,     //!< Wakeup durch Touchpad-Interrupt.
+    ESP_SLEEP_WAKEUP_ULP,          //!< Wakeup durch ULP-Programm.
+    ESP_SLEEP_WAKEUP_GPIO,         //!< Wakeup durch GPIO (nur Light Sleep auf ESP32, S2 und S3).
+    ESP_SLEEP_WAKEUP_UART,         //!< Wakeup durch UART (nur Light Sleep).
+    ESP_SLEEP_WAKEUP_WIFI,         //!< Wakeup durch WiFi (nur Light Sleep).
+    ESP_SLEEP_WAKEUP_COCPU,        //!< Wakeup durch Co-Prozessor-Interrupt.
+    ESP_SLEEP_WAKEUP_COCPU_TRAP_TRIG, //!< Wakeup durch Co-Prozessor-Absturz.
+    ESP_SLEEP_WAKEUP_BT            //!< Wakeup durch Bluetooth (nur Light Sleep).
 } esp_sleep_source_t;
 ```
 
@@ -126,4 +160,4 @@ typedef enum {
 
 --- 
 
-Die überarbeitete Version bietet eine klare Struktur, beschreibt die Kompatibilität ohne Unsicherheiten und enthält präzise Informationen zu Reset- und Wakeup-Gründen.
+
