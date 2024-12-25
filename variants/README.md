@@ -12,26 +12,21 @@ Das Verzeichnis `variants/` enthält für jede ESP32-Variante eine eigene Templa
 
 ```
 /ESP32StartupErrorAnalyzer
-│
+:
 ├── /src
 │   └── ESP32StartupErrorAnalyzer.cpp
 │   └── ESP32StartupErrorAnalyzer.h
 :
-├── /variants
-│   ├── ESP32-C2_template.h
-│   ├── ESP32-C3_template.h
-│   ├── ESP32-C5_template.h
-│   ├── ESP32-C6_template.h
-│   ├── ESP32-H2_template.h
-│   ├── ESP32-P4_template.h
-│   ├── ESP32-S2_template.h
-│   ├── ESP32-S3_template.h
-│   └── ESP32_template.h
-:
-└── /examples
-    ├── ...
-    ├── CustomConditionsExample
-    └── ErrorCounterWithDefault
+└── /variants
+    ├── ESP32-C2_template.h
+    ├── ESP32-C3_template.h
+    ├── ESP32-C5_template.h
+    ├── ESP32-C6_template.h
+    ├── ESP32-H2_template.h
+    ├── ESP32-P4_template.h
+    ├── ESP32-S2_template.h
+    ├── ESP32-S3_template.h
+    └── ESP32_template.h
 ```
 
 ### 3. **Reset-Gründe (`esp_reset_reason`)**
