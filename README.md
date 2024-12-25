@@ -21,7 +21,6 @@ This example shows how to use the ESP32StartupErrorAnalyzer library to analyse t
 This example ensures that the ESP32 is monitored during boot and that error conditions or special events, such as a reset or wakeup, are detected immediately.
 
 ```cpp
-/
 #include <ESP32StartupErrorAnalyzer.h>
 
 // Bedingungen und Callbacks definieren
@@ -42,7 +41,6 @@ void setup() {
 void loop() {
     // Hauptlogik
 }
-
 ```
 
 ## Requirements
