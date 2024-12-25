@@ -16,6 +16,7 @@ Das Verzeichnis `variants/` enthält für jede ESP32-Variante eine eigene Templa
 ├── /src
 │   └── ESP32StartupErrorAnalyzer.cpp
 │   └── ESP32StartupErrorAnalyzer.h
+:
 ├── /variants
 │   ├── ESP32-C2_template.h
 │   ├── ESP32-C3_template.h
