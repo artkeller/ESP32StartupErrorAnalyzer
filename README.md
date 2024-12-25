@@ -16,9 +16,9 @@ ESP32StartupErrorAnalyzer is an Arduino library that facilitates the analysis an
 ## Example
 A simple example can be found in the folder `examples/BasicUsage`.
 
-This example shows how to use the ESP32StartupErrorAnalyzer library to analyse the causes of errors and reset conditions when the ESP32 starts up. At startup, the library automatically checks the state of the ESP32 and executes corresponding callback functions when an error cause (such as a power-on reset or a wakeup by timer) is detected. The results are output via the serial console.
+This example shows how to use the **ESP32StartupErrorAnalyzer** library to analyse the causes of errors and reset conditions when the ESP32 starts up. At startup, the library automatically checks the state of the ESP32 and executes corresponding callback functions when an error cause (such as a power-on reset or a wakeup by timer) is detected. The results are output via the serial console.
 
-The example shows how the ESP32StartupErrorAnalyzer library is used to analyse specific startup conditions on an ESP32 and execute corresponding actions.
+The example `BasicUsage` shows how the `ESP32StartupErrorAnalyzer` library is used to analyse specific startup conditions on an ESP32 and execute corresponding actions.
 
 ### Defining the **conditions** and **callbacks**:
 
