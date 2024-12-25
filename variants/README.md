@@ -64,9 +64,9 @@ Die **ESP32-C2**, **ESP32-H2**, **ESP32-P4** und andere zukünftige Varianten k�
 
 ### 6. **Kompatibilität der Bibliothek**
 
-Insgesamt sind die meisten grundlegenden Reset-Gründe und Wakeup-Gründe in allen ESP32-Varianten identisch bzww. ähnlich und die  `ESP32StartupErrorAnalyzer`-Bibliothek sollte grundsätzlich mit den meisten Varianten kompatibel sein. Um  sicherzustellen, dass diese Bibliothek auch mit den neuesten Varianten (wie C2, C3, H2, P4) perfekt funktioniert, sind noch zusätzliche Tests und ggfs. Anpassungen vorzunehmen, vor allem, wenn es spezifische Fehlerbedingungen oder spezielle Reset-/Wakeup-Gründe in diesen neuen Modellen gibt.
+Insgesamt sind die meisten grundlegenden Reset-Gründe und Wakeup-Gründe in allen ESP32-Varianten identisch bzww. ähnlich und die  `ESP32StartupErrorAnalyzer`-Bibliothek sollte grundsätzlich mit allen Varianten kompatibel sein. Um  sicherzustellen, dass diese Bibliothek auch mit den neuesten Varianten (wie C2, C3, H2, P4) perfekt funktioniert, sind noch zusätzliche Tests und ggfs. Anpassungen vorzunehmen, vor allem, wenn es spezifische Fehlerbedingungen oder spezielle Reset-/Wakeup-Gründe in diesen neuen Modellen gibt.
 
-#### Weiteres Vorgehen/TODOS (last edit: 20241225)
+#### Weiteres Vorgehen/TODOS
 - **Testen auf allen Varianten**
 - **Modularität**: Erweiterung der Bibliothek, damit sie bei der Initialisierung die Verfügbarkeit bestimmter Reset-/Wakeup-Gründe überprüft und nur die relevanten Fehlerbedingungen aktiviert. Dies soll durch `#ifdef`-Bedingungen für verschiedene Chip-Modelle erfolgen.
 - **Zukünftige Varianten berücksichtigen**: Sicherstellung, dass bei neuen Modellen wie dem ESP32-H2 oder ESP32-P4 neue Reset-/Wakeup-Gründe berücksichtigt werden.
