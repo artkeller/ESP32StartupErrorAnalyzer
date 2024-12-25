@@ -27,6 +27,7 @@ Das Verzeichnis `variants/` enthält für jede ESP32-Variante eine eigene Templa
 │   ├── ESP32-S2_template.h
 │   ├── ESP32-S3_template.h
 │   └── ESP32_template.h
+_
 └── /examples
     ├── ...
     ├── CustomConditionsExample
