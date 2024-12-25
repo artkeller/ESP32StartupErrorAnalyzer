@@ -17,7 +17,7 @@ public:
     // Konstruktor: Default-Callback ist optional
     StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
 
-    // Führe die Analyse durch
+    // Fuehre die Analyse durch
     void analyze();
 
     // Dynamisches Hinzufügen weiterer Bedingungen
