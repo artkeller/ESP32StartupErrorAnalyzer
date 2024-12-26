@@ -14,8 +14,8 @@
  * These variables are stored in RTC memory, allowing their values to persist across resets 
  * unless explicitly reset or erased.
  */
- RTC_DATA_ATTR uint32_t panicResetCounter = 0;    ///< Counter for panic resets.
- static RTC_NOINIT_ATTR uint32_t powerOnResetCounter = 0; ///< Counter for power-on resets.
+ RTC_DATA_ATTR uint32_t panicResetCounter = 0;   ///< Counter for panic resets.
+ RTC_DATA_ATTR uint32_t powerOnResetCounter = 0; ///< Counter for power-on resets.
 
 /**
  * @brief Defines startup conditions and their associated callbacks.
@@ -36,8 +36,7 @@ std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
         // Increment and report power-on reset counter
         {[]() { return esp_reset_reason() == ESP_RST_POWERON; },
          []() {
-             Serial.printf("Power-on reset detected! Counter: %d\n", powerOnResetCounter);
-             if (powerOnResetCounter > 1000) powerOnResetCounter = 0; else powerOnResetCounter++;
+             powerOnResetCounter++;
              Serial.printf("Power-on reset detected! Counter: %d\n", powerOnResetCounter);
          }},
         // Report external wakeup
@@ -65,8 +64,8 @@ void setup() {
     analyzer.addCondition(
         []() { return esp_reset_reason() == ESP_RST_BROWNOUT; },
         []() {
-            panicResetCounter = 666;
-            powerOnResetCounter = 666;
+            panicResetCounter = 0;
+            powerOnResetCounter = 0;
             Serial.println("Brownout detected! Error counters reset.");
         }
     );
