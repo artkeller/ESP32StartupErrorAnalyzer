@@ -1,63 +1,61 @@
 /**
- * @file BasicUsage.ino
- * @brief Beispiel zur Nutzung des ESP32StartupErrorAnalyzer, um die Reset-Ursache zu analysieren.
- * 
- * Dieses Beispiel zeigt, wie man mit dem ESP32StartupErrorAnalyzer Reset-Bedingungen
- * definiert und Callback-Funktionen zur Verarbeitung der entsprechenden Bedingungen
- * registriert. Die Ergebnisse werden über die serielle Schnittstelle ausgegeben.
- */
+* @file BasicUsage.ino
+* @brief Example of how to use the ESP32StartupErrorAnalyzer to analyse the cause of the reset.
+* 
+* This example shows how to use the ESP32StartupErrorAnalyzer to define reset conditions
+* and register callback functions to process the corresponding conditions.
+* The results are output via the serial interface.
+*/
 
 #include <ESP32StartupErrorAnalyzer.h>
 
 /**
- * @brief Definiert die Reset-Bedingungen und deren zugehörige Callback-Funktionen.
- * 
- * Diese Funktion erstellt eine Liste von Bedingungen, die der Analyzer prüfen soll.
- * Jede Bedingung besteht aus zwei Lambda-Funktionen:
- * - Die erste Funktion gibt einen booleschen Wert zurück, der angibt, ob die Bedingung erfüllt ist.
- * - Die zweite Funktion definiert, was passieren soll, wenn die Bedingung erfüllt ist.
- * 
- * @return std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> 
- *         Liste der definierten Bedingungen.
- */
+* @brief Defines the reset conditions and their associated callback functions.
+* 
+* This function creates a list of conditions for the analyser to check.
+* Each condition consists of two lambda functions:
+* - The first function returns a boolean value that indicates whether the condition is met.
+* - The second function defines what should happen if the condition is met.
+* 
+* @return std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> 
+*         List of defined conditions.
+*/
 std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
-    return {
-        // Unbekannte Reset-Ursache, z. B. nach Upload eines neuen Sketches
-        {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, 
-         []() { Serial.println("Reset-Ursache konnte nicht bestimmt werden."); }},
-        
-        // Power-On-Reset, z. B. nach Drücken des RST-Buttons
-        {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, 
-         []() { Serial.println("Power-On-Ereignis erkannt."); }},
-    };
+  return {
+    // Unknown reset reason, e.g. after uploading a new sketch
+    { []() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, []() { Serial.println("Reset reason could not be determined."); } },
+
+    // Power-on reset, e.g. after pressing the RST button
+    { []() { return esp_reset_reason() == ESP_RST_POWERON; }, []() { Serial.println("Power-on event detected."); } },
+  };
 }
 
 /**
- * @brief Setup-Funktion, die einmalig beim Start des ESP32 aufgerufen wird.
- * 
- * Initialisiert die serielle Schnittstelle, gibt eine Startmeldung aus und startet
- * den ESP32StartupErrorAnalyzer mit den definierten Bedingungen.
- */
+* @brief Setup function that is called once when the ESP32 starts.
+* 
+* Initialises the serial interface, outputs a start message and starts
+* the ESP32StartupErrorAnalyzer with the defined conditions.
+*/
 void setup() {
-    // Serielle Schnittstelle initialisieren
-    Serial.begin(115200);
-    while(!Serial) {};  // Warten, bis die serielle Verbindung bereit ist (ESP32C3...)
-    Serial.println("Firmware started: ESP32StartupErrorAnalyzer - BasicUsage");
+  // Initialise serial interface
+  Serial.begin(115200);
+  while (!Serial) {};  // Wait until serial connection is ready (ESP32C3...)
+  Serial.println("Firmware started: ESP32StartupErrorAnalyzer - BasicUsage");
 
-    // Analyzer mit definierten Bedingungen starten
-    ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
+  // Start the analyser with defined conditions
+  ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
 
-    Serial.println("Start Analyzer...");
-    analyzer.analyze(); // Bedingungen analysieren und entsprechende Callbacks ausführen
-    Serial.println("Ready!");
+  Serial.println("Start Analyzer...");
+  analyzer.analyze();  // Analyse conditions and execute corresponding callbacks
+  Serial.println("Ready!");
 }
 
 /**
- * @brief Hauptprogrammschleife, die kontinuierlich ausgeführt wird.
- * 
- * In diesem Beispiel bleibt die Schleife leer, da die Analyse der Bedingungen
- * ausschließlich im `setup()`-Teil erfolgt.
- */
+* @brief Main program loop that runs continuously.
+* 
+* In this example, the loop remains empty because the analysis of the conditions
+* takes place exclusively in the `setup()` part.
+*/
 void loop() {
-    // Hauptlogik
+  // Main logic
 }
