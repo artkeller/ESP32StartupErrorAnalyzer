@@ -1,7 +1,7 @@
 #include "ESP32StartupErrorAnalyzer.h"
 
 // Konstruktor
-ESP32StartupErrorAnalyzer::StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback)
+ESP32StartupErrorAnalyzer::ESP32StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback)
     : conditions_(conditions), defaultCallback_(defaultCallback) {}
 
 // Führe die Analyse durch
