@@ -7,8 +7,6 @@ std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
         {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, []() { Serial.println("Power-On-Ereignis erkannt."); }},
     };
 } 
-    
-
 
 void setup() {
     Serial.begin(115200);
