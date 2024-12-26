@@ -1,11 +1,11 @@
 #include "ESP32StartupErrorAnalyzer.h"
 
 // Konstruktor
-StartupErrorAnalyzer::StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback)
+ESP32StartupErrorAnalyzer::StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback)
     : conditions_(conditions), defaultCallback_(defaultCallback) {}
 
 // Führe die Analyse durch
-void StartupErrorAnalyzer::analyze() {
+void ESP32StartupErrorAnalyzer::analyze() {
     bool conditionMatched = false;
     for (const auto& condition : conditions_) {
         if (condition.condition()) {
@@ -21,6 +21,6 @@ void StartupErrorAnalyzer::analyze() {
 }
 
 // Dynamisches Hinzufügen weiterer Bedingungen
-void StartupErrorAnalyzer::addCondition(const Condition& condition, const Callback& callback) {
+void ESP32StartupErrorAnalyzer::addCondition(const Condition& condition, const Callback& callback) {
     conditions_.push_back({condition, callback});
 }

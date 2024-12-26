@@ -1,10 +1,10 @@
-#ifndef STARTUP_ERROR_ANALYZER_H
-#define STARTUP_ERROR_ANALYZER_H
+#ifndef ESP32_STARTUP_ERROR_ANALYZER_H
+#define ESP32_STARTUP_ERROR_ANALYZER_H
 
 #include <functional>
 #include <vector>
 
-class StartupErrorAnalyzer {
+class ESP32StartupErrorAnalyzer {
 public:
     using Condition = std::function<bool()>;
     using Callback = std::function<void()>;
@@ -15,7 +15,7 @@ public:
     };
 
     // Konstruktor: Default-Callback ist optional
-    StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
+    ESP32StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
 
     // Fuehre die Analyse durch
     void analyze();
@@ -28,4 +28,4 @@ private:
     Callback defaultCallback_;
 };
 
-#endif // STARTUP_ERROR_ANALYZER_H
+#endif // ESP32_STARTUP_ERROR_ANALYZER_H
