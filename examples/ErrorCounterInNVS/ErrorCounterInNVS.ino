@@ -1,21 +1,16 @@
 /**
- * @file ErrorCounterInRTC.ino
- * @brief Example usage of ESP32StartupErrorAnalyzer with RTC memory-based error counters.
+ * @file ErrorCounterInNVS.ino
+ * @brief Example usage of ESP32StartupErrorAnalyzer with NVS-based error counters.
  * 
  * This example demonstrates how to use the `ESP32StartupErrorAnalyzer` to track and count 
- * specific reset reasons and handle them using RTC memory to retain the counters across resets.
+ * specific reset reasons and handle them using NVS storage to retain the counters across resets.
  */
 
 #include <ESP32StartupErrorAnalyzer.h>
+#include <Preferences.h>
 
-/**
- * @brief RTC memory storage for error counters.
- * 
- * These variables are stored in RTC memory, allowing their values to persist across resets 
- * unless explicitly reset or erased.
- */
- RTC_DATA_ATTR uint32_t panicResetCounter = 0;   ///< Counter for panic resets.
- RTC_DATA_ATTR uint32_t powerOnResetCounter = 0; ///< Counter for power-on resets.
+// Namespace for managing preferences
+Preferences preferences;
 
 /**
  * @brief Defines startup conditions and their associated callbacks.
@@ -30,13 +25,17 @@ std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
         // Increment and report panic reset counter
         {[]() { return esp_reset_reason() == ESP_RST_PANIC; },
          []() {
+             int panicResetCounter = preferences.getInt("panicCount", 0);
              panicResetCounter++;
+             preferences.putInt("panicCount", panicResetCounter);
              Serial.printf("Panic reset detected! Counter: %d\n", panicResetCounter);
          }},
         // Increment and report power-on reset counter
         {[]() { return esp_reset_reason() == ESP_RST_POWERON; },
          []() {
+             int powerOnResetCounter = preferences.getInt("powerOnCount", 0);
              powerOnResetCounter++;
+             preferences.putInt("powerOnCount", powerOnResetCounter);
              Serial.printf("Power-on reset detected! Counter: %d\n", powerOnResetCounter);
          }},
         // Report external wakeup
@@ -55,7 +54,10 @@ void setup() {
     // Initialize the serial connection
     Serial.begin(115200);
     while (!Serial) {}; // Wait until the serial connection is ready (important for ESP32-C3)
-    Serial.println("Firmware started: ESP32StartupErrorAnalyzer - ErrorCounterInRTC");
+    Serial.println("Firmware started: ESP32StartupErrorAnalyzer - ErrorCounterInNVS");
+
+    // Initialize the preferences storage
+    preferences.begin("errorAnalyzer", false);
 
     // Create the error analyzer with predefined startup conditions
     ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
@@ -64,8 +66,8 @@ void setup() {
     analyzer.addCondition(
         []() { return esp_reset_reason() == ESP_RST_BROWNOUT; },
         []() {
-            panicResetCounter = 0;
-            powerOnResetCounter = 0;
+            preferences.putInt("panicCount", 0);
+            preferences.putInt("powerOnCount", 0);
             Serial.println("Brownout detected! Error counters reset.");
         }
     );
