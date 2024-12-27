@@ -1,5 +1,5 @@
 /**
- * @file ConditionsInFile.ino
+ * @file 02-ConditionsInFile.ino
  * @brief Example demonstrating the usage of ESP32StartupErrorAnalyzer with conditions defined in a separate file.
  * 
  * This example shows how to separate the definition of startup conditions and callbacks 
