@@ -12,7 +12,7 @@ ESPRIC is a robust and flexible open-source library for the ESP32 specifically d
 3. Search for "ESPRIC" and install the library.
 
 **Manual installation:**
-1. Download the library ZIP archive from GitHub: [Link to GitHub repository]
+1. Download the library ZIP archive from GitHub: [https://github.com/artkeller/ESPRIC]
 2. Unzip the archive into your Arduino libraries folder.
 
 ## Basic usage
