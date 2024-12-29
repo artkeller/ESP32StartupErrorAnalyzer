@@ -1,6 +1,6 @@
-# ESP32StartupErrorAnalyzer
+# ESPRIC - ESP32 Reboot Investigation and Context Integrity Check
 
-ESP32StartupErrorAnalyzer is an Arduino library that facilitates the analysis and handling of startup error conditions on ESP32 devices. 
+ESPRIC is an Arduino library that facilitates the analysis and handling of startup error conditions on ESP32 devices. 
 
 ## Features
 - Define conditions that are checked during startup.
@@ -16,9 +16,9 @@ ESP32StartupErrorAnalyzer is an Arduino library that facilitates the analysis an
 ## Example
 A simple example can be found in the folder `examples/BasicUsage`.
 
-This example shows how to use the **ESP32StartupErrorAnalyzer** library to analyse the causes of errors and reset conditions when the ESP32 starts up. At startup, the library automatically checks the state of the ESP32 and executes corresponding callback functions when an error cause (such as a power-on reset or a wakeup by timer) is detected. The results are output via the serial console.
+This example shows how to use the **ESPRIC** library to analyse the causes of errors and reset conditions when the ESP32 starts up. At startup, the library automatically checks the state of the ESP32 and executes corresponding callback functions when an error cause (such as a power-on reset or a wakeup by timer) is detected. The results are output via the serial console.
 
-The example `BasicUsage` shows how the **ESP32StartupErrorAnalyzer** library is used to analyse specific startup conditions on an ESP32 and execute corresponding actions.
+The example `BasicUsage` shows how the **ESPRIC** library is used to analyse specific startup conditions on an ESP32 and execute corresponding actions.
 
 ### Defining the **conditions** and **callbacks**:
 
@@ -35,7 +35,7 @@ Each condition consists of:
 
 ### Initialisation in setup():
 
-- The `ESP32StartupErrorAnalyzer` is initialised with the defined conditions from `getStartupConditions()`.
+- The `ESPRIC` is initialised with the defined conditions from `getStartupConditions()`.
 - The analysis of the conditions is started with `analyze()`. Each fulfilled error or wake-up reason leads to the associated callback being called.
 
 ### Main logic in the loop():
@@ -45,10 +45,10 @@ Each condition consists of:
 `BasicUsage.ino`:
 ```cpp
 
-#include <ESP32StartupErrorAnalyzer.h>
+#include <ESPRIC.h>
 
 // Define the conditions and callbacks.
-std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
+std::vector<ESPRIC::ErrorCondition> getStartupConditions() {
     return {
         {[]() { return esp_reset_reason() == ESP_RST_PANIC; }, []() { Serial.println("Panik-Reset erkannt."); }},
         {[]() { return esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0; }, []() { Serial.println("Wakeup durch externes Signal."); }}
@@ -59,7 +59,7 @@ void setup() {
     Serial.begin(115200);
 
     // Instanziierung des Fehleranalysators
-    ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
+    ESPRIC analyzer(getStartupConditions());
     
     // Fehleranalyse starten
     analyzer.analyze();
