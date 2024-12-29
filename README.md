@@ -66,9 +66,9 @@ void loop() {
 We welcome any contributions! Whether it's bug reports, suggestions for improvements, or new features, every contribution is valued.
 
 ## License
-ESPRIC is released under the [license].
+ESPRIC is released under the Creative Commons Zero v1.0 Universal.
 
-[Link to GitHub repository]
+[https://github.com/artkeller/ESPRIC]
 [Link to documentation]
 [Link to forum or issue tracker]
 
