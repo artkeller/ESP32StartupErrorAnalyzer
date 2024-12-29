@@ -46,7 +46,7 @@ public:
      * The `ErrorCondition` structure associates a specific `Condition` with a `Callback` 
      * that is executed when the condition is true.
      */
-    struct ErrorCondition {
+    struct ESPRIC_Condition {
         Condition condition;  ///< The condition to evaluate.
         Callback callback;    ///< The callback to execute if the condition is true.
     };
@@ -61,7 +61,7 @@ public:
      * and an optional default callback. If no conditions are met during analysis, the 
      * default callback is executed.
      */
-    ESPRIC(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
+    ESPRIC(const std::vector<ESPRIC_Condition>& conditions, Callback defaultCallback = nullptr);
 
     /**
      * @brief Analyzes the conditions and executes the corresponding callbacks.
