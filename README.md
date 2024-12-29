@@ -18,31 +18,49 @@ ESPRIC is a robust and flexible open-source library for the ESP32 specifically d
 ## Basic usage
 ```cpp
 #include <ESPRIC.h>
+#include <ESPRIC.h>
 
-std::vector<ESPRIC::Condition> getConditions() {
+// Function to define the conditions and their corresponding callbacks
+std::vector<ESPRIC::ESPRIC_Condition> defineConditions() {
   return {
+    // Condition for an unknown reset reason
     {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; },
      []() { Serial.println("Memory reflashed? (Unknown reset reason)"); }},
-
+     
+    // Condition for a power-on reset
     {[]() { return esp_reset_reason() == ESP_RST_POWERON; },
      []() { Serial.println("Power-on detected."); }},
-
+     
+    // Condition for a panic reset
     {[]() { return esp_reset_reason() == ESP_RST_PANIC; }, 
-     []() { Serial.println("Panic reset detected. STOP!";
-            while (1) {}; }},
+     []() { 
+       Serial.println("Panic reset detected. STOP!"); 
+       while (1) {}; 
+     }},
   };
 }
 
-
-void setup() {
+// Function to initialize ESPRIC and perform analysis
+void initializeESPRIC() {
   Serial.begin(115200);
 
-  ESPRIC espric(getConditions());
-  espric.analyze();
+  // Create ESPRIC instance with the defined conditions
+  ESPRIC espric(defineConditions());
+
+  // Analyze the conditions and execute callbacks
+  auto result = espric.analyze();
+
+  // Optional: Log results
+  Serial.printf("Conditions matched: %d, unmatched: %d\n", 
+                result.matched, result.unmatched);
+}
+
+void setup() {
+  initializeESPRIC();
 }
 
 void loop() {
-  // ...
+  // Main application logic
 }
 ```
 
