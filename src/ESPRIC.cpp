@@ -1,15 +1,15 @@
 /**
- * @file ESP32StartupErrorAnalyzer.cpp
- * @brief Implementation of the ESP32StartupErrorAnalyzer class.
+ * @file ESPRIC.cpp
+ * @brief Implementation of the ESPRIC class.
  * 
  * This source file contains the implementation of methods for analyzing ESP32 startup 
  * conditions and executing associated callbacks.
  */
 
-#include "ESP32StartupErrorAnalyzer.h"
+#include "ESPRIC.h"
 
 /**
- * @brief Constructs the ESP32StartupErrorAnalyzer with predefined conditions and an optional default callback.
+ * @brief Constructs the ESPRIC with predefined conditions and an optional default callback.
  * 
  * @param conditions A vector of `ErrorCondition` structures to evaluate.
  * @param defaultCallback An optional callback executed if no conditions are met.
@@ -17,7 +17,7 @@
  * This constructor initializes the analyzer with a list of predefined conditions and 
  * optionally sets a default callback to handle cases where no conditions match.
  */
-ESP32StartupErrorAnalyzer::ESP32StartupErrorAnalyzer(
+ESPRIC::ESPRIC(
     const std::vector<ErrorCondition>& conditions,
     Callback defaultCallback)
     : conditions_(conditions), defaultCallback_(defaultCallback) {}
@@ -29,7 +29,7 @@ ESP32StartupErrorAnalyzer::ESP32StartupErrorAnalyzer(
  * for the first condition that evaluates to true. If no conditions are met and a default 
  * callback is defined, the default callback is executed.
  */
-void ESP32StartupErrorAnalyzer::analyze() {
+void ESPRIC::analyze() {
     bool conditionMatched = false; ///< Tracks whether any condition has been matched.
     
     for (const auto& condition : conditions_) {
@@ -54,6 +54,6 @@ void ESP32StartupErrorAnalyzer::analyze() {
  * This method allows developers to add new conditions and their callbacks dynamically. 
  * The added conditions are evaluated during the next call to `analyze`.
  */
-void ESP32StartupErrorAnalyzer::addCondition(const Condition& condition, const Callback& callback) {
+void ESPRIC::addCondition(const Condition& condition, const Callback& callback) {
     conditions_.push_back({condition, callback}); ///< Add the new condition and callback to the list.
 }

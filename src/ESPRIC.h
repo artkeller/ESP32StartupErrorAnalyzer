@@ -1,8 +1,8 @@
 /**
- * @file ESP32StartupErrorAnalyzer.h
+ * @file ESPRIC.h
  * @brief A utility class for analyzing and handling ESP32 startup conditions.
  * 
- * This header defines the `ESP32StartupErrorAnalyzer` class, which allows developers to analyze 
+ * This header defines the `ESPRIC` class, which allows developers to analyze 
  * the startup state of an ESP32 device and execute specific callbacks based on detected conditions. 
  * The class supports both predefined and dynamically added conditions, with optional default callbacks.
 
@@ -15,21 +15,21 @@
 
  */
 
-#ifndef ESP32_STARTUP_ERROR_ANALYZER_H
-#define ESP32_STARTUP_ERROR_ANALYZER_H
+#ifndef ESPRIC_H
+#define ESPRIC_H
 
 #include <functional>
 #include <vector>
 
 /**
- * @class ESP32StartupErrorAnalyzer
+ * @class ESPRIC
  * @brief A class for analyzing ESP32 startup conditions and executing corresponding callbacks.
  * 
  * This class is designed to evaluate a set of conditions defined as lambda functions and 
  * execute associated callbacks when the conditions are met. It also allows dynamic addition of 
  * new conditions during runtime.
  */
-class ESP32StartupErrorAnalyzer {
+class ESPRIC {
 public:
     /**
      * @brief Type alias for condition logic.
@@ -69,7 +69,7 @@ public:
      * and an optional default callback. If no conditions are met during analysis, the 
      * default callback is executed.
      */
-    ESP32StartupErrorAnalyzer(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
+    ESPRIC(const std::vector<ErrorCondition>& conditions, Callback defaultCallback = nullptr);
 
     /**
      * @brief Analyzes the conditions and executes the corresponding callbacks.
@@ -96,4 +96,4 @@ private:
     Callback defaultCallback_;              ///< Optional default callback if no conditions are met.
 };
 
-#endif // ESP32_STARTUP_ERROR_ANALYZER_H
+#endif // ESPRIC_H
