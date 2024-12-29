@@ -7,7 +7,7 @@
 * The results are output via the serial interface.
 */
 
-#include <ESP32StartupErrorAnalyzer.h>
+#include <ESPRIC.h>
 
 /**
 * @brief Defines the reset conditions and their associated callback functions.
@@ -20,13 +20,15 @@
 * @return std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> 
 *         List of defined conditions.
 */
-std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getRestartConditions() {
+std::vector<ESPRIC::ESPRIC_Condition> getMyESPRIC_Conditions() {
   return {
     // Unknown reset reason, e.g. after uploading a new sketch
-    {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, []() { Serial.println("Reset reason could not be determined."); }},
+    {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, 
+     []() { Serial.println("ESPRIC: Reset reason could not be determined."); }},
 
     // Power-on reset, e.g. after pressing the RST button
-    {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, []() { Serial.println("Power-on event detected."); }},
+    {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, 
+     []() { Serial.println("ESPRIC: Power-on event detected."); }},
   };
 }
 
@@ -40,10 +42,10 @@ void setup() {
   // Initialise serial interface
   Serial.begin(115200);
   while (!Serial) {};  // Wait until serial connection is ready (ESP32C3...)
-  Serial.println("Firmware started: ESP32StartupErrorAnalyzer - BasicUsage");
+  Serial.println("Firmware started: ESPRIC - BasicUsage");
 
   // Start the analyser with defined conditions
-  ESP32StartupErrorAnalyzer analyzer(getRestartConditions());
+  ESPRIC analyzer(getMyESPRIC_Conditions());
 
   Serial.println("Start Analyzer...");
   analyzer.analyze();  // Analyse conditions and execute corresponding callbacks
