@@ -18,7 +18,7 @@
  * optionally sets a default callback to handle cases where no conditions match.
  */
 ESPRIC::ESPRIC(
-    const std::vector<ErrorCondition>& conditions,
+    const std::vector<ESPRIC_Condition>& conditions,
     Callback defaultCallback)
     : conditions_(conditions), defaultCallback_(defaultCallback) {}
 
