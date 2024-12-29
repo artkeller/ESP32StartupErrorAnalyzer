@@ -1,8 +1,8 @@
 /**
 * @file 01-BasicUsage.ino
-* @brief Example of how to use the ESP32StartupErrorAnalyzer to analyse the cause of the reset.
+* @brief Example of how to use the ESPRIC to analyse the cause of the reset.
 * 
-* This example shows how to use the ESP32StartupErrorAnalyzer to define reset conditions
+* This example shows how to use the ESPRIC to define reset conditions
 * and register callback functions to process the corresponding conditions.
 * The results are output via the serial interface.
 */
@@ -10,15 +10,15 @@
 #include <ESPRIC.h>
 
 /**
-* @brief Defines the reset conditions and their associated callback functions.
+* @brief Defines the ESPRIC conditions and their associated callback functions.
 * 
 * This function creates a list of conditions for the analyser to check.
 * Each condition consists of two lambda functions:
 * - The first function returns a boolean value that indicates whether the condition is met.
 * - The second function defines what should happen if the condition is met.
 * 
-* @return std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> 
-*         List of defined conditions.
+* @return std::vector<ESPRIC::ESPRIC_Condition> 
+*         List of defined ESPRIC conditions.
 */
 std::vector<ESPRIC::ESPRIC_Condition> getMyESPRIC_Conditions() {
   return {
@@ -36,7 +36,7 @@ std::vector<ESPRIC::ESPRIC_Condition> getMyESPRIC_Conditions() {
 * @brief Setup function that is called once when the ESP32 starts.
 * 
 * Initialises the serial interface, outputs a start message and starts
-* the ESP32StartupErrorAnalyzer with the defined conditions.
+* the ESPRIC with the defined conditions.
 */
 void setup() {
   // Initialise serial interface
