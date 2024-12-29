@@ -23,7 +23,7 @@ ESPRIC::ESPRIC(
     Callback defaultCallback)
     : conditions_(conditions), defaultCallback_(defaultCallback) {}
 
-1/**
+/**
  * @brief Analyzes the defined conditions and executes the corresponding callbacks.
  * 
  * This method iterates through the list of defined conditions and executes the callback 
