@@ -3,12 +3,12 @@
  * @brief Example demonstrating the usage of ESP32StartupErrorAnalyzer with conditions defined in a separate file.
  * 
  * This example shows how to separate the definition of startup conditions and callbacks 
- * into an external file for better modularity and reusability. The `StartupConditions.h` file 
+ * into an external file for better modularity and reusability. The `RestartConditions.h` file 
  * contains the conditions to be analyzed by the ESP32StartupErrorAnalyzer.
  */
 
 #include <ESP32StartupErrorAnalyzer.h>
-#include "StartupConditions.h"
+#include "RestartConditions.h"
 
 /**
  * @brief Initializes the firmware, configures the analyzer, and performs startup condition analysis.
@@ -25,10 +25,10 @@ void setup() {
   Serial.println("Firmware started: ESP32StartupErrorAnalyzer - ConditionsInFile");
 
   // Create an instance of the analyzer and pass the defined conditions
-  ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
+  ESP32StartupErrorAnalyzer analyzer(getRestartConditions());
 
   Serial.println("Start Analyzer...");
-  analyzer.analyze();  // Analyze the startup conditions and execute callbacks
+  analyzer.analyze();  // Analyze the restart conditions and execute callbacks
   Serial.println("Ready!");
 }
 

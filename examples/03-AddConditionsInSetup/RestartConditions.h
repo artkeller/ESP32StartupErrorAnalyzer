@@ -1,5 +1,5 @@
 /**
- * @file StartupConditions.h
+ * @file RestartConditions.h
  * @brief Definition of startup conditions and corresponding callbacks for ESP32StartupErrorAnalyzer.
  * 
  * This file provides a modular and reusable way to define startup conditions and their associated 
@@ -7,15 +7,15 @@
  * reset reasons and wakeup causes specific to ESP32-based systems.
  */
 
-#ifndef STARTUPCONDITIONS_H
-#define STARTUPCONDITIONS_H
+#ifndef RESTARTCONDITIONS_H
+#define RESTARTCONDITIONS_H
 
 #include <ESP32StartupErrorAnalyzer.h>
 #include <esp_system.h>
 #include <esp_sleep.h>
 
 /**
- * @brief Retrieves a list of startup conditions and their corresponding callback functions.
+ * @brief Retrieves a list of restart conditions and their corresponding callback functions.
  * 
  * This function defines a vector of `ESP32StartupErrorAnalyzer::ErrorCondition` objects, 
  * each specifying a condition to check and a callback to execute when the condition is met. 
@@ -24,7 +24,7 @@
  * 
  * @return A vector of `ESP32StartupErrorAnalyzer::ErrorCondition` objects.
  */
-std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
+std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getReatartConditions() {
     return {
         /**
          * @brief Condition for panic reset.
@@ -60,4 +60,4 @@ std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
     };
 }
 
-#endif // STARTUPCONDITIONS_H
+#endif // RESTARTCONDITIONS_H

@@ -20,13 +20,13 @@
 * @return std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> 
 *         List of defined conditions.
 */
-std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getStartupConditions() {
+std::vector<ESP32StartupErrorAnalyzer::ErrorCondition> getRestartConditions() {
   return {
     // Unknown reset reason, e.g. after uploading a new sketch
-    { []() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, []() { Serial.println("Reset reason could not be determined."); } },
+    {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, []() { Serial.println("Reset reason could not be determined."); }},
 
     // Power-on reset, e.g. after pressing the RST button
-    { []() { return esp_reset_reason() == ESP_RST_POWERON; }, []() { Serial.println("Power-on event detected."); } },
+    {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, []() { Serial.println("Power-on event detected."); }},
   };
 }
 
@@ -43,7 +43,7 @@ void setup() {
   Serial.println("Firmware started: ESP32StartupErrorAnalyzer - BasicUsage");
 
   // Start the analyser with defined conditions
-  ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
+  ESP32StartupErrorAnalyzer analyzer(getRestartConditions());
 
   Serial.println("Start Analyzer...");
   analyzer.analyze();  // Analyse conditions and execute corresponding callbacks

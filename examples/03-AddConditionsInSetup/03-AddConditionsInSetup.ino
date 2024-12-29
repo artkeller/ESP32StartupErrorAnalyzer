@@ -8,7 +8,7 @@
  */
 
 #include <ESP32StartupErrorAnalyzer.h>
-#include "StartupConditions.h"
+#include "RestartConditions.h"
 
 /**
  * @brief Main setup function to initialize the firmware and start condition analysis.
@@ -23,8 +23,8 @@ void setup() {
     while (!Serial) {}; // Wait for the serial connection to be ready (important for some devices like ESP32-C3)
     Serial.println("Firmware started: ESP32StartupErrorAnalyzer - AddConditionsInSetup");
 
-    // Initialize the startup error analyzer with predefined conditions
-    ESP32StartupErrorAnalyzer analyzer(getStartupConditions());
+    // Initialize the restart error analyzer with predefined conditions
+    ESP32StartupErrorAnalyzer analyzer(getReatartConditions());
 
     /**
      * @brief Dynamically add a condition for deep-sleep reset.
