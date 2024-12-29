@@ -40,10 +40,10 @@ public:
     using Callback = std::function<void()>;
 
     /**
-     * @struct ErrorCondition
+     * @struct ESPRIC_Condition
      * @brief Represents a pairing of a condition and its associated callback.
      * 
-     * The `ErrorCondition` structure associates a specific `Condition` with a `Callback` 
+     * The `ESPRIC_Condition` structure associates a specific `Condition` with a `Callback` 
      * that is executed when the condition is true.
      */
     struct ESPRIC_Condition {
@@ -52,12 +52,24 @@ public:
     };
 
     /**
-     * @brief Constructor to initialize the error analyzer with predefined conditions.
+     * @struct AnalysisResult
+     * @brief Represents the result of analyzing conditions.
      * 
-     * @param conditions A vector of predefined `ErrorCondition` structures to evaluate.
+     * This structure contains the number of matched and unmatched conditions, allowing the 
+     * caller to understand the outcome of the analysis.
+     */
+    struct AnalysisResult {
+        size_t matched;    ///< Number of conditions that were met.
+        size_t unmatched;  ///< Number of conditions that were not met.
+    };
+
+    /**
+     * @brief Constructor to initialize the analyzer with predefined conditions.
+     * 
+     * @param conditions A vector of predefined `ESPRIC_Condition` structures to evaluate.
      * @param defaultCallback (Optional) A default callback to execute if no conditions are met.
      * 
-     * The constructor initializes the error analyzer with a set of predefined conditions 
+     * The constructor initializes the analyzer with a set of predefined conditions 
      * and an optional default callback. If no conditions are met during analysis, the 
      * default callback is executed.
      */
@@ -67,10 +79,12 @@ public:
      * @brief Analyzes the conditions and executes the corresponding callbacks.
      * 
      * This method evaluates all defined conditions in order and executes the associated 
-     * callback for the first condition that evaluates to true. If no conditions are met 
+     * callback for each condition that evaluates to true. If no conditions are met 
      * and a default callback is defined, the default callback is executed.
+     * 
+     * @return An `AnalysisResult` structure containing the counts of matched and unmatched conditions.
      */
-    void analyze();
+    AnalysisResult analyze();
 
     /**
      * @brief Adds a new condition and its callback dynamically during runtime.
@@ -84,8 +98,8 @@ public:
     void addCondition(const Condition& condition, const Callback& callback);
 
 private:
-    std::vector<ErrorCondition> conditions_; ///< List of all defined error conditions.
-    Callback defaultCallback_;              ///< Optional default callback if no conditions are met.
+    std::vector<ESPRIC_Condition> conditions_; ///< List of all defined startup conditions.
+    Callback defaultCallback_;                ///< Optional default callback if no conditions are met.
 };
 
 #endif // ESPRIC_H
