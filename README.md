@@ -18,7 +18,6 @@ ESPRIC is a robust and flexible open-source library for the ESP32 specifically d
 ## Basic usage
 ```cpp
 #include <ESPRIC.h>
-#include <ESPRIC.h>
 
 // Function to define the conditions and their corresponding callbacks
 std::vector<ESPRIC::ESPRIC_Condition> defineConditions() {
