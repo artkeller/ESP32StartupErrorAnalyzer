@@ -89,9 +89,7 @@ void loop() {
 We welcome any contributions! Whether it's bug reports, suggestions for improvements, or new features, every contribution is valued.
 
 ## License
-ESPRIC is released under the [CC0 1.0 Universal](../LICENSE).
-
-[https://github.com/artkeller/ESPRIC]
+ESPRIC is released under the [CC0 1.0 Universal](LICENSE).
 
 [Link to documentation]
 
@@ -109,8 +107,9 @@ Frequently asked questions and answers. TBD
 
 Overview of main changes in the different versions.
 
+- version 0.2.1 - Adoption of all examples
 - version 0.2.0 - Renaming lib as ESPRIC
-- version 0.1.0 - Initial version
+- version 0.1.0 - Initial pre-version/study
 
 ## Future plans
 
