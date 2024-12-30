@@ -4,7 +4,13 @@ This folder contains a series of examples demonstrating how to use the ESPRIC li
 
 ## Examples
 
->>>>HIER BITTE LISTE DER EXAPLES MIT HYPERSPRUNG AUF DIE PASSENDEN LABELS<<<<
+- [01-BasicUsage](#01-basicusage)
+- [02-AdvancedConditions](#02-advancedconditions)
+- [03-DeepSleepChecks](#03-deepsleepchecks)
+- [04-GPIOConditions](#04-gpioconditions)
+- [05-RTCVariableCheck](#05-rtcvariablecheck)
+- [06-EnvironmentConditions](#06-environmentconditions)
+- [07-SafetyAndSecurity](#07-safetyandsecurity)
 
 ### 01-BasicUsage
 
