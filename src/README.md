@@ -104,7 +104,7 @@ void loop() {
 ---
 
 ## License
-This library is open-source and released under the [CC0 1.0 Universal license].
+This library is open-source and released under the [CC0 1.0 Universal].
 
 ---
 
