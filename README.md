@@ -107,7 +107,7 @@ Frequently asked questions and answers. TBD
 
 Overview of main changes in the different versions.
 
-- version 0.2.1 - Adoption of all examples
+- version 0.2.1 - Adoption of new examples
 - version 0.2.0 - Renaming lib as ESPRIC
 - version 0.1.0 - Initial pre-version/study
 
