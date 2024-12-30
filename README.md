@@ -114,6 +114,8 @@ Overview of main changes in the different versions.
 
 ## Future plans
 
-Outlook on planned developments. TBD
+Outlook on planned developments:
+
+- Automatic use of defaults based on variants with all RST and wakeup reasons as standard log() message
 
 ---
