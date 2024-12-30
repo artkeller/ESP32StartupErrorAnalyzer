@@ -91,8 +91,6 @@ We welcome any contributions! Whether it's bug reports, suggestions for improvem
 ## License
 ESPRIC is released under the [CC0 1.0 Universal](LICENSE).
 
-[https://github.com/artkeller/ESPRIC]
-
 [Link to documentation]
 
 [Link to forum or issue tracker]
@@ -109,8 +107,9 @@ Frequently asked questions and answers. TBD
 
 Overview of main changes in the different versions.
 
+- version 0.2.1 - Adoption of all examples
 - version 0.2.0 - Renaming lib as ESPRIC
-- version 0.1.0 - Initial version
+- version 0.1.0 - Initial pre-version/study
 
 ## Future plans
 
