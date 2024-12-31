@@ -1,43 +1,41 @@
 /**
- * @file 02-ConditionsInFile.ino
- * @brief Example demonstrating the usage of ESP32StartupErrorAnalyzer with conditions defined in a separate file.
+ * @file 02-ModularESPRICExample.ino
+ * @brief Example showcasing how to use ESPRIC in a modular way with restart conditions defined externally.
  * 
- * This example shows how to separate the definition of startup conditions and callbacks 
- * into an external file for better modularity and reusability. The `RestartConditions.h` file 
- * contains the conditions to be analyzed by the ESP32StartupErrorAnalyzer.
+ * This sketch demonstrates how to encapsulate ESP32 restart conditions and their callbacks
+ * in a reusable header file, keeping the main sketch lightweight and focused.
  */
 
 #include <ESP32StartupErrorAnalyzer.h>
 #include "RestartConditions.h"
 
 /**
- * @brief Initializes the firmware, configures the analyzer, and performs startup condition analysis.
+ * @brief Initializes the firmware and runs the ESPRIC analyzer with predefined restart conditions.
  * 
  * This function:
- * - Initializes the serial connection.
- * - Instantiates the ESP32StartupErrorAnalyzer with conditions defined in `StartupConditions.h`.
- * - Performs the analysis and executes the corresponding callbacks for each matched condition.
+ * - Sets up the serial communication for debugging.
+ * - Creates an instance of ESP32StartupErrorAnalyzer with the conditions defined in `RestartConditions.h`.
+ * - Executes the analysis during the setup phase.
  */
 void setup() {
-  // Initialize the serial connection
+  // Initialize the serial interface
   Serial.begin(115200);
-  while (!Serial) {};  // Wait until the serial connection is ready (important for some devices like ESP32-C3)
-  Serial.println("Firmware started: ESP32StartupErrorAnalyzer - ConditionsInFile");
+  while (!Serial) {};  // Wait until the serial connection is ready
+  Serial.println("Firmware started: ESPRIC - Modular Example");
 
-  // Create an instance of the analyzer and pass the defined conditions
+  // Instantiate and run the analyzer
   ESP32StartupErrorAnalyzer analyzer(getRestartConditions());
 
-  Serial.println("Start Analyzer...");
-  analyzer.analyze();  // Analyze the restart conditions and execute callbacks
-  Serial.println("Ready!");
+  Serial.println("Starting Analyzer...");
+  analyzer.analyze();  // Perform analysis and execute callbacks
+  Serial.println("Analyzer Complete!");
 }
 
 /**
  * @brief Main loop function.
  * 
- * This function is executed continuously after `setup()`. 
- * In this example, it is left empty because the analysis occurs entirely during the setup phase.
+ * No additional logic is implemented in this example as the analysis is handled in `setup()`.
  */
 void loop() {
-  // Main logic can be added here
+  // Additional runtime logic could be added here
 }
