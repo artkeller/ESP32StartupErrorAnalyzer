@@ -59,7 +59,7 @@ Ready!
 ```
 Firmware started: ESPRIC - Modular Example
 Starting Analyzer...
-[] Power-on Reset.
+[ESPRIC] Power-on reset detected.
 Analyzer Complete!
 ```
 
