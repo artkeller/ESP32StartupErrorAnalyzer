@@ -89,7 +89,7 @@ void loop() {
 We welcome any contributions! Whether it's bug reports, suggestions for improvements, or new features, every contribution is valued.
 
 ## License
-ESPRIC is released under the [CC0 1.0 Universal](LICENSE).
+ESPRIC is released under the  [CC0 1.0 Universal](LICENSE).
 
 [Link to documentation]
 
