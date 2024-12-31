@@ -6,12 +6,12 @@ This folder contains a series of examples demonstrating how to use the ESPRIC li
 
 - [01-BasicUsage](#01-basicusage)
 - [02-ModularESPRICExample](#02-modularespricexample)
-- [02-AdvancedConditions](#02-advancedconditions)
-- [03-DeepSleepChecks](#03-deepsleepchecks)
-- [04-GPIOConditions](#04-gpioconditions)
-- [05-RTCVariableCheck](#05-rtcvariablecheck)
-- [06-EnvironmentConditions](#06-environmentconditions)
-- [07-SafetyAndSecurity](#07-safetyandsecurity)
+- [03-AdvancedConditions](#03-advancedconditions)
+- [04-DeepSleepChecks](#04-deepsleepchecks)
+- [05-GPIOConditions](#05-gpioconditions)
+- [06-RTCVariableCheck](#06-rtcvariablecheck)
+- [08-EnvironmentConditions](#76-environmentconditions)
+- [08-SafetyAndSecurity](#08-safetyandsecurity)
 
 ### 01-BasicUsage
 
@@ -42,27 +42,50 @@ Ready!
 ---
 
 ### 02-ModularESPRICExample
-**Description coming soon.**
+
+**Purpose**: Demonstrates how to use ESPRIC in a modular way by encapsulating restart conditions and their callbacks in an external header file.
+
+**Features**:
+- Keeps the main sketch lightweight and focused on initialization.
+- Defines restart conditions and their corresponding callbacks in `RestartConditions.h`.
+- Utilizes a modular design approach for reusability and better organization.
+
+**Code Overview**:
+- `getRestartConditions()`: Provided in `RestartConditions.h`, defines the conditions and callbacks for analyzing restart causes.
+- `setup()`: Initializes the serial interface, creates an instance of the ESPRIC analyzer with predefined conditions, and runs the analysis.
+- `loop()`: Left empty as all logic is executed in `setup()`.
+
+**Example Output**:
+```
+Firmware started: ESPRIC - Modular Example
+Starting Analyzer...
+[] Power-on Reset.
+Analyzer Complete!
+```
+
+**How to Run**:
+1. Ensure `RestartConditions.h` is in the same directory as the sketch.
+2. Upload the sketch to your ESP32 using the Arduino IDE or PlatformIO.
+3. Open the serial monitor at 115200 baud to view the output.
 
 ---
 
-### 02-AdvancedConditions
+### 03-AdvancedConditions
 **Description coming soon.**
 
-### 03-DeepSleepChecks
+### 04-DeepSleepChecks
 **Description coming soon.**
 
-### 04-GPIOConditions
+### 05-GPIOConditions
 **Description coming soon.**
 
-### 05-RTCVariableCheck
+### 06-RTCVariableCheck
 **Description coming soon.**
 
-### 06-EnvironmentConditions
+### 07-EnvironmentConditions
 **Description coming soon.**
 
-### 07-SafetyAndSecurity
+### 08-SafetyAndSecurity
 **Description coming soon.**
 
 ---
-
