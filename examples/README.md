@@ -5,6 +5,7 @@ This folder contains a series of examples demonstrating how to use the ESPRIC li
 ## Examples
 
 - [01-BasicUsage](#01-basicusage)
+- [02-ModularESPRICExample](#02-modularespricexample)
 - [02-AdvancedConditions](#02-advancedconditions)
 - [03-DeepSleepChecks](#03-deepsleepchecks)
 - [04-GPIOConditions](#04-gpioconditions)
@@ -37,6 +38,11 @@ Ready!
 **How to Run**:
 1. Upload the sketch to your ESP32 using the Arduino IDE or PlatformIO.
 2. Open the serial monitor at 115200 baud to view the output.
+
+---
+
+### 02-ModularESPRICExample
+**Description coming soon.**
 
 ---
 
