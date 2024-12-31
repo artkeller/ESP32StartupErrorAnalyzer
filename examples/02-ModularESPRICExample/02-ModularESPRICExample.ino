@@ -6,7 +6,7 @@
  * in a reusable header file, keeping the main sketch lightweight and focused.
  */
 
-#include <ESP32StartupErrorAnalyzer.h>
+#include <ESPRIC.h>
 #include "RestartConditions.h"
 
 /**
@@ -14,7 +14,7 @@
  * 
  * This function:
  * - Sets up the serial communication for debugging.
- * - Creates an instance of ESP32StartupErrorAnalyzer with the conditions defined in `RestartConditions.h`.
+ * - Creates an instance of ESPRIC with the conditions defined in `RestartConditions.h`.
  * - Executes the analysis during the setup phase.
  */
 void setup() {
@@ -24,7 +24,7 @@ void setup() {
   Serial.println("Firmware started: ESPRIC - Modular Example");
 
   // Instantiate and run the analyzer
-  ESP32StartupErrorAnalyzer analyzer(getRestartConditions());
+  ESPRIC analyzer(getRestartConditions());
 
   Serial.println("Starting Analyzer...");
   analyzer.analyze();  // Perform analysis and execute callbacks

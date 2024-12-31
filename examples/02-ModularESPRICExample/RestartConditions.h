@@ -20,7 +20,7 @@
  * @namespace ESPRIC
  * @brief Namespace for all ESPRIC-related functionality.
  */
-namespace ESPRIC {
+//namespace ESPRIC {
 
 /**
  * @brief Retrieves a vector of restart conditions and their corresponding callback functions.
@@ -36,10 +36,10 @@ namespace ESPRIC {
  * - Power-on resets triggered by device startup.
  * - Wakeups caused by external signals (e.g., GPIO).
  * 
- * @return std::vector<ESPRIC::ErrorAnalyzer::ErrorCondition> 
+ * @return std::vector<ESPRIC::ESPRIC_Condition> 
  * A vector of conditions to be analyzed by the `ESPRIC::ErrorAnalyzer`.
  */
-std::vector<ESPRIC::ErrorAnalyzer::ErrorCondition> getRestartConditions() {
+std::vector<ESPRIC::ESPRIC_Condition> getRestartConditions() {
     return {
         /**
          * @brief Condition for panic reset.
@@ -81,6 +81,6 @@ std::vector<ESPRIC::ErrorAnalyzer::ErrorCondition> getRestartConditions() {
     };
 }
 
-} // namespace ESPRIC
+//} // namespace ESPRIC
 
 #endif // ESPRIC_RESTARTCONDITIONS_H
