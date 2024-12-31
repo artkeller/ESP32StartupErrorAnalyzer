@@ -14,7 +14,7 @@ Dabei bleiben viele Grundfunktionen einheitlich, während spezifische Erweiterun
 Die spezifischen Konfigurationen und Funktionen für verschiedene ESP32-Modelle sind im Verzeichnis `variants/` organisiert. Jede ESP32-Variante erhält eine eigene Template-Datei, die Reset- und Wakeup-Gründe sowie zugehörige Callbacks beschreibt.  
 
 ```
-/ESP32StartupErrorAnalyzer
+/ESPRIC
 :
 ├── /src
 │   ├── ESP32StartupErrorAnalyzer.cpp
