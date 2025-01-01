@@ -3,6 +3,12 @@
 ## Overview
 The `src` folder contains the implementation of the **ESPRIC** class, which is designed for analyzing ESP32 startup conditions, executing corresponding callbacks, and providing detailed insights into matched and unmatched conditions. This README provides a high-level overview of the header and implementation files (`ESPRIC.h` and `ESPRIC.cpp`).
 
+### Important Notice
+
+- The ESPRIC library is specifically designed for ESP32 devices. Currently, no other MCU platform offers equivalent post-mortem analysis capabilities supported by this library. Please ensure that you are using this library with ESP32-compatible devices only.
+- If you are looking for a more generic solution for cyber resilience and analysis across multiple platforms, please refer to the [CRATE project on GitHub](http://).
+
+
 ---
 
 ## Files
@@ -38,13 +44,6 @@ This header file defines the `ESPRIC` class and its associated types, structures
      - Evaluates conditions, executes callbacks, and returns an `AnalysisResult`.
    - `addCondition`:
      - Allows dynamic addition of new conditions and callbacks.
-
-#### **Important No**
-
-The ESPRIC library is specifically designed for ESP32 devices. Currently, no other MCU platform offers equivalent post-mortem analysis capabilities supported by this library. Please ensure that you are using this library with ESP32-compatible devices only.
-
-If you are looking for a more generic solution for cyber resilience and analysis across multiple platforms, please refer to the CRATE project on GitHub.
-
 
 ### ESPRIC.cpp
 This source file contains the implementation of the `ESPRIC` class methods defined in the header file.
