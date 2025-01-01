@@ -2,19 +2,21 @@
  * @file ESPRIC_Conditions.h
  * @brief Defines conditions for ESP32 reset and wakeup causes.
  *
- * @author Artkeller <artkeller@gmx.de>
- * @date 20250101
- *
  * This header provides a set of conditions for analyzing the reset and wakeup
  * causes of an ESP32 device using the ESPRIC library. It covers all documented
  * reset and wakeup causes, allowing developers to handle specific scenarios
  * programmatically.
+ *
+ 9* @author Thomas Walloschke <artkeller@gmc.de>
+ * @date 20250101
  */
 
 #ifndef ESPRIC_CONDITIONS_H
 #define ESPRIC_CONDITIONS_H
 
 #include <ESPRIC.h>
+#include <esp_system.h>
+#include <esp_sleep.h>
 
 /**
  * @brief Get predefined reset conditions for the ESP32.
@@ -23,8 +25,13 @@
  * Each condition includes a detection function and an associated callback.
  * 
  * @return A vector of `ESPRIC_Condition` objects for reset analysis.
+ *
+ * @note The additional reset codes (e.g., USB reset, power glitch reset, etc.)
+ *       are only available on newer ESP32 chips (ESP32-S2, ESP32-S3). For older
+ *       ESP32 models, these reset codes are not supported and will not be included
+ *       in the analysis. Ensure compatibility with your target chip.
  */
-std::vector<ESPRIC_Condition> getResetConditions() {
+std::vector<ESPRIC::ESPRIC_Condition> getResetConditions() {
     return {
         {[]() { return esp_reset_reason() == ESP_RST_UNKNOWN; }, 
          []() { Serial.println("Unknown reset detected."); }},
@@ -48,6 +55,7 @@ std::vector<ESPRIC_Condition> getResetConditions() {
          []() { Serial.println("Brownout reset detected."); }},
         {[]() { return esp_reset_reason() == ESP_RST_SDIO; }, 
          []() { Serial.println("SDIO reset detected."); }},
+    #ifndef CONFIG_IDF_TARGET_ESP32
         {[]() { return esp_reset_reason() == ESP_RST_USB; }, 
          []() { Serial.println("USB reset detected."); }},
         {[]() { return esp_reset_reason() == ESP_RST_JTAG; }, 
@@ -58,6 +66,7 @@ std::vector<ESPRIC_Condition> getResetConditions() {
          []() { Serial.println("Power glitch reset detected."); }},
         {[]() { return esp_reset_reason() == ESP_RST_CPU_LOCKUP; }, 
          []() { Serial.println("CPU lockup reset detected."); }}
+    #endif
     };
 }
 
@@ -69,7 +78,7 @@ std::vector<ESPRIC_Condition> getResetConditions() {
  * 
  * @return A vector of `ESPRIC_Condition` objects for wakeup analysis.
  */
-std::vector<ESPRIC_Condition> getWakeupConditions() {
+std::vector<ESPRIC::ESPRIC_Condition> getWakeupConditions() {
     return {
         {[]() { return esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_UNDEFINED; }, 
          []() { Serial.println("No defined wakeup cause."); }},
