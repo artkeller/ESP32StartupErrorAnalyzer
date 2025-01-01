@@ -8,7 +8,7 @@
  * programmatically.
  *
  9* @author Thomas Walloschke <artkeller@gmc.de>
- * @date 20250101
+ * @date 20250101 
  */
 
 #ifndef ESPRIC_CONDITIONS_H
