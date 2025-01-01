@@ -39,6 +39,13 @@ This header file defines the `ESPRIC` class and its associated types, structures
    - `addCondition`:
      - Allows dynamic addition of new conditions and callbacks.
 
+#### **Important No**
+
+The ESPRIC library is specifically designed for ESP32 devices. Currently, no other MCU platform offers equivalent post-mortem analysis capabilities supported by this library. Please ensure that you are using this library with ESP32-compatible devices only.
+
+If you are looking for a more generic solution for cyber resilience and analysis across multiple platforms, please refer to the CRATE project on GitHub.
+
+
 ### ESPRIC.cpp
 This source file contains the implementation of the `ESPRIC` class methods defined in the header file.
 
