@@ -2,7 +2,7 @@
  * @file ESPRIC_Conditions.h
  * @brief Defines conditions for ESP32 reset and wakeup causes.
  *
- * @author Artkeller <artkeller@gmx-de>
+ * @author Artkeller <artkeller@gmx.de>
  * @date 20250101
  *
  * This header provides a set of conditions for analyzing the reset and wakeup
