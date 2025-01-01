@@ -10,6 +10,8 @@
 #ifndef ESPRIC_H
 #define ESPRIC_H
 
+#ifdef ESP32
+
 #include <functional>
 #include <vector>
 
@@ -101,5 +103,15 @@ private:
     std::vector<ESPRIC_Condition> conditions_; ///< List of all defined startup conditions.
     Callback defaultCallback_;                ///< Optional default callback if no conditions are met.
 };
+
+#else
+
+#warning "The ESPRIC library is specifically designed for ESP32 devices and relies on ESP-IDF reset and \
+wakeup cause APIs. Currently, no other MCU platform provides equivalent post-mortem analysis capabilities. \
+Please use this library with ESP32-compatible devices only."
+
+#error "For generic ANY Reboot Investigation and Context Integrity Check see for the ANYRIC project on github"
+
+#endif // ESP32
 
 #endif // ESPRIC_H
