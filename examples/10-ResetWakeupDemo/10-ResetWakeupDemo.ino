@@ -1,5 +1,5 @@
 /**
- * @file 10_ResetWakeupDemo.ino
+ * @file 10-ResetWakeupDemo.ino
  * @brief Demonstrates the use of the ESPRIC library to analyze ESP32 reset and wakeup causes.
  * 
  * This example uses two independent `ESPRIC` objects to analyze the causes of resets and wakeups.
