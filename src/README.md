@@ -6,7 +6,7 @@ The `src` folder contains the implementation of the **ESPRIC** class, which is d
 ### Important Notice
 
 - The ESPRIC library is specifically designed for ESP32 devices. Currently, no other MCU platform offers equivalent post-mortem analysis capabilities supported by this library. Please ensure that you are using this library with ESP32-compatible devices only.
-- If you are looking for a more generic solution for cyber resilience and analysis across multiple platforms, please refer to the [CRATE project on GitHub](http://).
+- If you are looking for a more generic solution for cyber resilience and analysis across multiple platforms, please refer to the [CRATE project on GitHub](https://github.com/artkellerenterprises/CRATE).
 
 
 ---
