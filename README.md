@@ -18,6 +18,8 @@ ESPRIC is a robust and flexible open-source library for the ESP32 specifically d
 ---
 
 ## Basic usage
+With this example, you can analyse the reset reason of an ESP32 and react flexibly to it. The ESPRIC library offers a modular structure that can be easily customised to meet specific requirements in your projects.
+
 ```cpp
 #include <ESPRIC.h>
 
@@ -64,6 +66,35 @@ void loop() {
   // Main application logic
 }
 ```
+
+#### Step-by-step explanation:
+
+1. **Definition of the conditions:**
+
+   The `defineConditions()` function creates a list of conditions based on the reset reasons of the ESP32. Each condition consists of
+  - **A condition function:** This checks whether there is a specific reset reason.
+  - **A callback function:** This is executed if the condition applies.
+
+  Example:
+  - If the reset reason is `ESP_RST_UNKNOWN`, the following is output: ‘Memory reflashed? (Unknown reset reason)’.
+  - In the case of an `ESP_RST_POWERON` (power-on reset), the following is output: ‘Power-on detected.’
+  - In the event of an `ESP_RST_PANIC` (panic reset), a STOP loop is executed to analyse the status.
+
+2. **Initialisation of the ESPRIC instance**:
+
+   The library is initialised in the `initializeESPRIC()` function:
+- The defined conditions are transferred.
+- The analysis is carried out with `espric.analyze()`, whereby the conditions are checked and corresponding actions are triggered.
+- In addition, the result is logged, indicating how many conditions were or were not fulfilled.
+
+3. **Use in setup():**
+
+   The `initialiseESPRIC()` function is called in the `setup()` block so that the analysis is performed when the device is started.
+
+5. **Flexibility in loop():**
+
+   The `loop()` block remains free for the main application, so that the developer can integrate the library into any application without restrictions for the main logic.
+
 
 ---
 
