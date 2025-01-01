@@ -2,6 +2,9 @@
  * @file ESPRIC_Conditions.h
  * @brief Defines conditions for ESP32 reset and wakeup causes.
  *
+ * @author Artkeller <artkeller@gmx-de>
+ * @date 20250101
+ *
  * This header provides a set of conditions for analyzing the reset and wakeup
  * causes of an ESP32 device using the ESPRIC library. It covers all documented
  * reset and wakeup causes, allowing developers to handle specific scenarios
