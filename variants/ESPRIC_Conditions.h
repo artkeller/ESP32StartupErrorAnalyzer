@@ -7,7 +7,7 @@
  * reset and wakeup causes, allowing developers to handle specific scenarios
  * programmatically.
  *
- 9* @author Thomas Walloschke <artkeller@gmc.de>
+ * @author Thomas Walloschke <artkeller@gmc.de>
  * @date 20250101 
  */
 
