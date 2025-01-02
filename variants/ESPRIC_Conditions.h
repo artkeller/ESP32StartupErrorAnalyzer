@@ -15,7 +15,7 @@
 #define ESPRIC_CONDITIONS_H
 
 #include <ESPRIC.h>
-#include <esp_system.h>
+#include <esp_system.h>			// Arduino version != IDF-Version
 #include <esp_sleep.h>
 
 /**
@@ -37,8 +37,10 @@ std::vector<ESPRIC::ESPRIC_Condition> getResetConditions() {
          []() { Serial.println("Unknown reset detected."); }},
         {[]() { return esp_reset_reason() == ESP_RST_POWERON; }, 
          []() { Serial.println("Power-on reset detected."); }},
+	#ifndef CONFIG_IDF_TARGET_ESP32
         {[]() { return esp_reset_reason() == ESP_RST_EXT; }, 
          []() { Serial.println("External signal reset detected."); }},
+	#endif
         {[]() { return esp_reset_reason() == ESP_RST_SW; }, 
          []() { Serial.println("Software reset detected."); }},
         {[]() { return esp_reset_reason() == ESP_RST_PANIC; }, 
