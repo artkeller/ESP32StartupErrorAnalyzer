@@ -4,7 +4,7 @@
 The **timing** folder is dedicated to documenting runtime measurements and tests to provide performance insights. It focuses on specific scenarios on an ESP32, particularly regarding behavior in deep-sleep modes. The results aim to validate the stability and functionality of power-down domain configurations.
 
 ### Hardware
-- **Microcontroller**: ESP32 (Model: Atom, 240 MHz clock)
+- **Microcontroller**: ESP32 (Model: M5Atom, 240 MHz clock)
 
 ### Compiler Settings
 - **Core Debug Level**: 'Info'
