@@ -6,7 +6,7 @@ The **timing** folder documents runtime measurements and performance tests relat
 ---
 
 ## **Summary**
-- Both tests confirmed the proper configuration of ESP32 power-down domains.
+- All tests confirmed the proper configuration of ESP32 power-down domains.
 - Minimal runtime overhead was observed.
 - The code is robust and ready for further deployment or integration with advanced libraries like ESPRIC.
 
