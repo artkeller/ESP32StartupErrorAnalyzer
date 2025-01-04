@@ -163,8 +163,7 @@ A condition definition for the `RTC8M` domain:
 - **Conclusion**:
   - Detailed debug logging confirmed functionality and stability.
 
-
-(alles folgende in kurzform, bitte im gleichen format, wie oben anpassen)
+---
 
 ### **Test 3**
 
