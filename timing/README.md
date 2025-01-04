@@ -162,3 +162,74 @@ A condition definition for the `RTC8M` domain:
   - 136 ms (from first domain initialization to completion).
 - **Conclusion**:
   - Detailed debug logging confirmed functionality and stability.
+
+
+(alles folgende in kurzform, bitte im gleichen format, wie oben anpassen)
+
+### **Test 3**
+
+#### **Configuration**
+- **Domains Tested**:
+  - RTC8M, RTC_FAST_MEM, RTC_SLOW_MEM, RTC_PERIPH, XTAL, VDDSDIO.
+- **Compiler Settings**:
+  - Core Debug Level: **Verbose**.
+- **Modification**:
+  - The `isError()` function emulates errors by setting `err = 0xFFFF`.
+
+#### **Code Snippet**
+Modified `isError()` function:
+```cpp
+bool isError(esp_err_t err, const char* domainName) {
+  err = 0xFFFF; // Test Error condition
+  if (err != ESP_OK) {
+    log_e("Configuration failed for %s: Error code: 0x%X", domainName, err);
+    return true;
+  }
+  return false;
+}
+```
+
+#### **Log Output**
+```log
+[    14][D][esp32-hal-cpu.c:244] setCpuFrequencyMhz(): PLL: 480 / 2 = 240 Mhz, APB: 80000000 Hz
+[  1045][I][ValidatePowerDownDomainConditions.ino:43] testPowerDownDomainConditions(): Starting 'PowerDownDomainConditions' Test Report:
+
+[  1047][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 1: RTC8M PD Domain
+[  1057][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for RTC8M: Error code: 0xFFFF
+[  1068][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'RTC8M PD Domain' failed.
+[  1078][E][PowerDownDomainConditions.h:60] operator()(): Failed to configure 'RTC8M' powerdown domain.
+
+[  1087][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 2: RTC_FAST_MEM PD Domain
+[  1099][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for RTC_FAST_MEM: Error code: 0xFFFF
+[  1110][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'RTC_FAST_MEM PD Domain' failed.
+[  1121][E][PowerDownDomainConditions.h:65] operator()(): Failed to configure 'RTC_FAST_MEM' powerdown domain.
+
+[  1131][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 3: RTC_SLOW_MEM PD Domain
+[  1142][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for RTC_SLOW_MEM: Error code: 0xFFFF
+[  1153][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'RTC_SLOW_MEM PD Domain' failed.
+[  1164][E][PowerDownDomainConditions.h:70] operator()(): Failed to configure 'RTC_SLOW_MEM' powerdown domain.
+
+[  1174][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 4: RTC_PERIPH PD Domain
+[  1185][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for RTC_PERIPH: Error code: 0xFFFF
+[  1196][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'RTC_PERIPH PD Domain' failed.
+[  1207][E][PowerDownDomainConditions.h:75] operator()(): Failed to configure 'RTC_PERIPH' powerdown domain.
+
+[  1217][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 5: XTAL PD Domain
+[  1227][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for XTAL: Error code: 0xFFFF
+[  1238][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'XTAL PD Domain' failed.
+[  1249][E][PowerDownDomainConditions.h:80] operator()(): Failed to configure 'XTAL' powerdown domain.
+
+[  1259][D][ValidatePowerDownDomainConditions.ino:47] testPowerDownDomainConditions(): Testing Condition 6: VDDSDIO PD Domain
+[  1270][E][ValidatePowerDownDomainConditions.ino:26] isError(): Configuration failed for VDDSDIO: Error code: 0xFFFF
+[  1281][E][ValidatePowerDownDomainConditions.ino:54] testPowerDownDomainConditions(): Condition 'VDDSDIO PD Domain' failed.
+[  1292][E][PowerDownDomainConditions.h:85] operator()(): Failed to configure 'VDDSDIO' powerdown domain.
+```
+
+#### **Analysis**
+- **Result**:
+  - All domains failed as expected, emulating error conditions.
+- **Runtime**:
+  - 252 ms (from first domain initialization to completion).
+- **Conclusion**:
+  - Error-handling logic successfully captured and logged all failures.
+  - System behaves as intended under error conditions, providing clear diagnostics.
