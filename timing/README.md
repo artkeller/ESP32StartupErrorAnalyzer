@@ -21,7 +21,7 @@ f
 ## ValidatePowerDownDomainConditions.ino
 
 ### Ziel
-Dieser Sketch prüft die Konfiguration von Power-Down-Domains des ESP32 während des Deep-Sleep-Modus. Dabei werden vordefinierte Bedingungen ("Conditions") evaluiert und detaillierte Protokolle erstellt.
+Dieser Sketch prüft die Konfiguration von Power-Down-Domains des ESP32 während des Deep-Sleep-Modus. Dabei werden vordefinierte Bedingungen ("Conditions") evaluiert und detaillierte Protokolle erstellt. In diesem ersten Test wurde generischer Code im Sketch verwendet und nicht die Library ESPRIC.
 
 ### Funktionsweise
 1. **Setup-Phase**:
@@ -80,10 +80,20 @@ Ein Eintrag der Bedingungsliste:
 },
 ```
 
-### Testbedingungen
+### Testablauf
 
-Es wurden 6 Domain Bedingungen getestet: RTC8M, RTC_FAST_MEM, RTC_SLOW_MEM, RTC_PERIPH, XTAL, VDDSDIO.
+Es wurden 6 Domain Bedingungen getestet: 
 
+Konfiguriere
+
+- RTC8M
+- RTC_FAST_MEM
+- RTC_SLOW_MEM
+- RTC_PERIPH
+- XTAL
+- VDDSDIO
+
+und werte die Rückmeldungen aus.
 
 ---
 
