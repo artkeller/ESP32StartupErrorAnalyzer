@@ -2,9 +2,12 @@
 
 ## Übersicht
 Der Ordner **timing** dient dazu, Laufzeitmessungen und Tests zu dokumentieren, um Performanceaussagen zu treffen. Hier werden spezifische Szenarien auf einem ESP32 evaluiert, insbesondere im Hinblick auf das Verhalten in Deep-Sleep-Modi. Die Ergebnisse sollen helfen, die Stabilität und Funktionalität von Power-Down-Domain-Konfigurationen zu validieren.
-
+f
 ### Hardware
 - **Mikrocontroller**: ESP32 (Modell: Atom, 240 MHz Taktung)
+
+### Compiler Settings
+- **Core Debug Level:** 'Info'
 
 ### Inhalt
 - **Code**:
@@ -76,6 +79,11 @@ Ein Eintrag der Bedingungsliste:
   []() { log_e("Failed to configure 'RTC8M' powerdown domain."); }
 },
 ```
+
+### Testbedingungen
+
+Es wurden 6 Domain Bedingungen getestet: RTC8M, RTC_FAST_MEM, RTC_SLOW_MEM, RTC_PERIPH, XTAL, VDDSDIO.
+
 
 ---
 
