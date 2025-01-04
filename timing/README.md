@@ -212,3 +212,5 @@ std::vector<PowerDownDomainCondition> definePowerDownDomainConditions() {
     00:07:58.508 -> 
     00:07:58.508 -> [  1046][I][ValidatePowerDownDomainConditions.ino:66] testPowerDownDomainConditions(): All conditions passed.
 ```
+
+die laufzeit beträgt damit 2 ms
