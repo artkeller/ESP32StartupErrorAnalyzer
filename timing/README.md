@@ -1,11 +1,14 @@
-Here’s the complete and refined version of the requested document in English:
-
----
-
 # **Timing**
 
 ## **Overview**
 The **timing** folder documents runtime measurements and performance tests related to power-down domain behavior on an ESP32. These measurements primarily focus on deep-sleep mode to ensure stability and proper configuration of the power-down domains.
+
+---
+
+## **Summary**
+- Both tests confirmed the proper configuration of ESP32 power-down domains.
+- Minimal runtime overhead was observed.
+- The code is robust and ready for further deployment or integration with advanced libraries like ESPRIC.
 
 ---
 
@@ -159,14 +162,3 @@ A condition definition for the `RTC8M` domain:
   - 136 ms (from first domain initialization to completion).
 - **Conclusion**:
   - Detailed debug logging confirmed functionality and stability.
-
----
-
-## **Summary**
-- Both tests confirmed the proper configuration of ESP32 power-down domains.
-- Minimal runtime overhead was observed.
-- The code is robust and ready for further deployment or integration with advanced libraries like ESPRIC.
-
---- 
-
-Let me know if further refinement is needed!
