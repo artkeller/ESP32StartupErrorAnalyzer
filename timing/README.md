@@ -1,42 +1,42 @@
-# Timing
+### Timing
 
-## Übersicht
-Der Ordner **timing** dient dazu, Laufzeitmessungen und Tests zu dokumentieren, um Performanceaussagen zu treffen. Hier werden spezifische Szenarien auf einem ESP32 evaluiert, insbesondere im Hinblick auf das Verhalten in Deep-Sleep-Modi. Die Ergebnisse sollen helfen, die Stabilität und Funktionalität von Power-Down-Domain-Konfigurationen zu validieren.
-f
+## Overview
+The **timing** folder is dedicated to documenting runtime measurements and tests to provide performance insights. It focuses on specific scenarios on an ESP32, particularly regarding behavior in deep-sleep modes. The results aim to validate the stability and functionality of power-down domain configurations.
+
 ### Hardware
-- **Mikrocontroller**: ESP32 (Modell: Atom, 240 MHz Taktung)
+- **Microcontroller**: ESP32 (Model: Atom, 240 MHz clock)
 
 ### Compiler Settings
-- **Core Debug Level:** 'Info'
+- **Core Debug Level**: 'Info'
 
-### Inhalt
+### Content
 - **Code**:
-  - `ValidatePowerDownDomainConditions.ino`: Hauptsketch zur Validierung.
-  - `PowerDownDomainConditions.h`: Header-Datei zur Definition und Konfiguration der Power-Down-Domains.
-- **Ergebnisse**:
-  - Detaillierte Protokolle über Teststatus (Erfolg/Fehler).
+  - `ValidatePowerDownDomainConditions.ino`: Main sketch for validation.
+  - `PowerDownDomainConditions.h`: Header file defining and configuring power-down domains.
+- **Results**:
+  - Detailed logs of test statuses (success/failure).
 
 ---
 
 ## ValidatePowerDownDomainConditions.ino
 
-### Ziel
-Dieser Sketch prüft die Konfiguration von Power-Down-Domains des ESP32 während des Deep-Sleep-Modus. Dabei werden vordefinierte Bedingungen ("Conditions") evaluiert und detaillierte Protokolle erstellt.
+### Objective
+This sketch verifies the configuration of ESP32 power-down domains during deep-sleep mode. Predefined conditions are evaluated, and detailed logs are generated. In this initial test, generic code was used instead of the ESPRIC library.
 
-### Funktionsweise
-1. **Setup-Phase**:
-   - Initialisiert die serielle Kommunikation.
-   - Ruft die Bedingungen aus `PowerDownDomainConditions.h` ab.
+### Functionality
+1. **Setup Phase**:
+   - Initializes serial communication.
+   - Retrieves conditions from `PowerDownDomainConditions.h`.
 2. **Tests**:
-   - Iteriert über jede Bedingung, testet sie und protokolliert die Ergebnisse.
-   - Im Fehlerfall wird eine definierte Callback-Funktion aufgerufen.
-3. **Protokollierung**:
-   - Ergebnisse werden als Log-Ausgaben dokumentiert:
-     - Erfolg: "Condition passed."
-     - Fehler: "Condition failed."
+   - Iterates through each condition, tests it, and logs the results.
+   - Calls a defined callback function in case of failure.
+3. **Logging**:
+   - Logs results as:
+     - Success: "Condition passed."
+     - Failure: "Condition failed."
 
 ### Code
-Ein Auszug des Sketches:
+A snippet of the sketch:
 ```cpp
 #include <vector>
 #include "PowerDownDomainConditions.h"
@@ -56,22 +56,22 @@ void loop() {}
 
 ## PowerDownDomainConditions.h
 
-### Ziel
-Definiert die Power-Down-Domain-Bedingungen und zugehörige Fehler-Callbacks. Diese Datei ist modular aufgebaut, um flexibel neue Domains hinzuzufügen.
+### Objective
+Defines power-down domain conditions and associated error callbacks. This file is modularly designed to flexibly add new domains.
 
-### Struktur
+### Structure
 1. **PowerDownDomainCondition**:
-   - Struktur zur Beschreibung einer Bedingung:
-     - Name der Domain.
-     - Funktion zur Prüfung der Bedingung.
-     - Callback-Funktion bei Fehlern.
+   - A structure describing a condition:
+     - Domain name.
+     - Function to check the condition.
+     - Callback function for errors.
 2. **definePowerDownDomainConditions()**:
-   - Liefert eine Liste aller zu prüfenden Domains:
+   - Returns a list of all domains to be tested:
      - RTC8M, RTC_FAST_MEM, RTC_SLOW_MEM, RTC_PERIPH, XTAL, VDDSDIO.
-     - CPU (nur, wenn vom SoC unterstützt).
+     - CPU (if supported by the SoC).
 
-### Code-Beispiel
-Ein Eintrag der Bedingungsliste:
+### Code Example
+An entry from the condition list:
 ```cpp
 {
   "RTC8M PD Domain",
@@ -80,17 +80,25 @@ Ein Eintrag der Bedingungsliste:
 },
 ```
 
-### Testbedingungen
+### Test Procedure
+Six domain conditions were tested: 
 
-Es wurden 6 Domain Bedingungen getestet: RTC8M, RTC_FAST_MEM, RTC_SLOW_MEM, RTC_PERIPH, XTAL, VDDSDIO.
+Configured domains:
+- RTC8M
+- RTC_FAST_MEM
+- RTC_SLOW_MEM
+- RTC_PERIPH
+- XTAL
+- VDDSDIO
 
+The responses were evaluated for correctness.
 
 ---
 
-## Ergebnisse
+## Results
 
-### Log-Ausgabe
-Mit Debug-Level "Info" wurde folgender Bericht generiert:
+### Log Output
+With the debug level set to "Info," the following report was generated:
 ```log
 [  1044][I][ValidatePowerDownDomainConditions.ino:43] testPowerDownDomainConditions(): Starting 'PowerDownDomainConditions' Test Report:
 
@@ -99,16 +107,13 @@ Mit Debug-Level "Info" wurde folgender Bericht generiert:
 
 ### Interpretation
 
-- **Alle Bedingungen bestanden**:
-  - Alle Power-Down-Domains konnten erfolgreich konfiguriert werden.
-  - Keine Fehler traten auf.
+- **All Conditions Passed**:
+  - All power-down domains were successfully configured.
+  - No errors occurred.
 
-- **Ziel erreicht**:
-  - Die Konfiguration ist stabil und funktional.
+- **Objective Achieved**:
+  - The configuration is stable and functional.
   
-- **Laufzeit**:
-  - Die gemessene Laufzeit betrug 2 ms (Startzeit: 1044 ms, Endzeit: 1046 ms) und liegt somit innerhalb akzeptabler Grenzen für die durchgeführten Konfigurationen.
-
-
-
+- **Runtime**:
+  - The measured runtime was 2 ms (start time: 1044 ms, end time: 1046 ms), which is within acceptable limits for the performed configurations.
 
